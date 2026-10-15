@@ -109,7 +109,16 @@ CREATE TABLE donation_config (
 
 -- Insert default superadmin (default password is 'password')
 INSERT INTO users (name, email, password_hash, role) 
-VALUES ('Administrador', 'admin@institutocasajane.org.br', '$2a$10$4Qn1OtLCDl9aFlrh/DqMnensm9eQx/DdPKxOOA9u3WG2xuoT25z/C', 'superadmin');
+VALUES ('Administrador', 'admin@institutocasajane.org.br', '$2a$10$4Qn1OtLCDl9aFlrh/DqMnensm9eQx/DdPKxOOA9u3WG2xuoT25z/C', 'superadmin')
+ON CONFLICT (email) DO UPDATE 
+SET password_hash = EXCLUDED.password_hash, role = EXCLUDED.role;
+
+-- Insert superadmin Gabriel (default password is 'admin')
+INSERT INTO users (name, email, password_hash, role)
+VALUES ('Gabriel', 'gabrielfreecss@gmail.com', '$2a$10$4xcl46chLsJhp3/MP/1yk.qsiPUH7BNec2FK9dfzoBAAbZH/1tLkq', 'superadmin')
+ON CONFLICT (email) DO UPDATE 
+SET password_hash = EXCLUDED.password_hash, role = EXCLUDED.role;
+
 
 
 -- Insert sample donation config
