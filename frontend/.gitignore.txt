@@ -1,3 +1,6 @@
+# Cria ou anexa regras essenciais ao .gitignore na raiz
+@"
 node_modules/
 dist/
 .env
+"@ | Out-File -FilePath .gitignore -Encoding utf8 -Append
