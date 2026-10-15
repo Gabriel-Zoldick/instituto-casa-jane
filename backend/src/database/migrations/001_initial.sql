@@ -107,10 +107,10 @@ CREATE TABLE donation_config (
   show_donation_section BOOLEAN DEFAULT true
 );
 
--- Insert default superadmin
+-- Insert default superadmin (default password is 'password')
 INSERT INTO users (name, email, password_hash, role) 
-VALUES ('Administrador', 'admin@institutocasajane.org.br', '$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'superadmin');
--- Default password is 'password' - MUST be changed on first login
+VALUES ('Administrador', 'admin@institutocasajane.org.br', '$2a$10$4Qn1OtLCDl9aFlrh/DqMnensm9eQx/DdPKxOOA9u3WG2xuoT25z/C', 'superadmin');
+
 
 -- Insert sample donation config
 INSERT INTO donation_config (message) VALUES ('Sua doação transforma vidas!');
