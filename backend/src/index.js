@@ -70,10 +70,16 @@ if (process.env.FRONTEND_URL && !allowedOrigins.includes(process.env.FRONTEND_UR
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Permite requisições sem origin (como chamadas curl, mobile apps ou do mesmo servidor)
       if (!origin) return callback(null, true);
-      
-      if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
+
+      const isVercelDomain = typeof origin === 'string' && origin.endsWith('.vercel.app');
+      const isAllowed = 
+        allowedOrigins.indexOf(origin) !== -1 ||
+        isVercelDomain ||
+        process.env.FRONTEND_URL === '*' ||
+        process.env.NODE_ENV !== 'production';
+
+      if (isAllowed) {
         callback(null, true);
       } else {
         callback(new Error('Origem não permitida pela política de CORS da Casa Jane.'));
